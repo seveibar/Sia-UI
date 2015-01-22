@@ -191,6 +191,12 @@ var ui = (function(){
             console.error(help("switchView"));
             return;
         }
+
+        // Check that the new view isn't the old view
+        if (newView == currentView){
+            return;
+        }
+
         // Check if view is valid
         if (viewNames.indexOf(newView) === -1){
             console.error(newView + " is not a valid view");

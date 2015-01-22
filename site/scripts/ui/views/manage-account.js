@@ -70,6 +70,10 @@ ui._manageAccount = ui["_manage-account"] = (function(){
 
     function onViewOpened(data){
 
+        if (!accountName){
+            setAccount("Default");
+        }
+
         // Find specified account
         var account;
         for (var i = 0;i < data.wallet.Accounts.length;i++){

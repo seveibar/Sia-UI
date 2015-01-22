@@ -173,7 +173,7 @@ var controller = (function() {
                 "NumAddresses": response.NumAddresses,
                 "DefaultAccount": "Main Account",
                 "Accounts": [{
-                    "Name": "Main Account",
+                    "Name": "Default",
                     "Balance": response.Balance,
                     "USDBalance": util.USDConvert(response.Balance),
                     "NumAddresses": response.NumAddresses,
