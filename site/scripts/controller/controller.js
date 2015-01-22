@@ -8,18 +8,24 @@ var controller = (function() {
         system.getUIConfig(function(config) {
             uiConfig = config;
 
-            update();
-            addListeners();
-
-            setInterval(function() {
-                update();
-            }, 250);
-
-            // Wait two seconds then check for a Sia client update
-            setTimeout(function() {
-                promptUserIfUpdateAvailable();
-            }, 2000);
+            controller.daemonManager.start(config, function() {
+                prepareUI();
+            });
         });
+    }
+
+    function prepareUI() {
+        update();
+        addListeners();
+
+        setInterval(function() {
+            update();
+        }, 250);
+
+        // Wait two seconds then check for a Sia client update
+        setTimeout(function() {
+            promptUserIfUpdateAvailable();
+        }, 2000);
     }
 
     function promptUserIfUpdateAvailable() {
