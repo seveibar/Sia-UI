@@ -1,5 +1,7 @@
 all: site
 
 site:
-    haml markup/index.haml index.html
-    lessc stylesheets/main.less stylesheets/style.css
+	cd site && haml markup/index.haml index.html
+	cd site && lessc stylesheets/main.less stylesheets/style.css
+
+.PHONY: all site

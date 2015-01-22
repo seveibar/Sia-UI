@@ -1,0 +1,61 @@
+<!doctype html>
+%html
+    %head
+        %title Sia
+
+        %link{:rel => "stylesheet",
+             :href => "libraries/bootstrap.min.css"}
+        %link{:rel => "stylesheet",
+             :href => "libraries/bootstrap-theme.min.css"}
+        %link{:rel => "stylesheet",
+              :href => "libraries/font-awesome-4.2.0/css/font-awesome.min.css"}
+        %link{:rel => "stylesheet",
+             :href => "stylesheets/style.css"}
+
+        %script{:type => "text/javascript",:src => "libraries/jquery.js"}
+        -# When using atom-shell, jquery thinks it needs require to load
+        %script{:type => "text/javascript"}
+            window.$ = window.jQuery = require("./libraries/jquery.js");
+        %script{:type => "text/javascript",:src => "libraries/jquery.ui.widget.js"}
+        %script{:type => "text/javascript",:src => "libraries/jquery.iframe-transport.js"}
+        %script{:type => "text/javascript",:src => "libraries/jquery.fileupload.js"}
+        %script{:type => "text/javascript",:src => "libraries/bootstrap.min.js"}
+        %script{:type => "text/javascript",:src => "scripts/util.js"}
+        %script{:type => "text/javascript",:src => "scripts/controller.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/ui.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/header.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/FieldElement.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/overview.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/hosting.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/mining.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/manage-account.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/money.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/files.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/transfer-funds.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/upload-file.js"}
+        %script{:type => "text/javascript",:src => "scripts/ui/views/network.js"}
+        :javascript
+            $(window).ready(function(){
+                ui.init();
+                controller.init();
+            });
+
+    %body
+        = Haml::Engine.new(File.read('markup/header.haml')).render
+        .container
+            #sidebar-and-content.row
+                = Haml::Engine.new(File.read('markup/sidebar.haml')).render
+                #content.col-md-9
+                    #loader
+                        %i.fa.fa-circle-o-notch.fa-spin
+                    = Haml::Engine.new(File.read('markup/pages/overview.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/mining.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/manage-account.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/money.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/files.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/hosting.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/transfer-funds.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/upload-file.haml')).render
+                    = Haml::Engine.new(File.read('markup/pages/network.haml')).render
+            = Haml::Engine.new(File.read('markup/footer.haml')).render
+        = Haml::Engine.new(File.read('markup/hovering.haml')).render
