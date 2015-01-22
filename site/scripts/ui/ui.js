@@ -212,13 +212,20 @@ var ui = (function(){
 
         if (transitionType == "load"){
             // Play a dummy loading animation (we may need the time later)
-            // startLoadingAnimation();
-            // setTimeout(function(){
-            //     stopLoadingAnimation(newView);
-            // },50);
-            $("#" + currentView).hide();
-            $("#" + newView).show();
-            currentView = newView;
+            startLoadingAnimation({
+                "fade": true,
+                "loader":false,
+                "fadeTime": 200
+            });
+            setTimeout(function(){
+                stopLoadingAnimation(newView, {
+                    "fade":true,
+                    "fadeTime":200
+                });
+            },200);
+            // $("#" + currentView).hide();
+            // $("#" + newView).show();
+            // currentView = newView;
         }else if (transitionType == "slideright"){
             slideAnimation(newView, "right");
         }else if (transitionType == "slideleft"){
@@ -238,13 +245,16 @@ var ui = (function(){
         });
 
         if (effects.fade){
+            effects.fadeTime = effects.fadeTime || 400;
             // Animate the loader in
-            $("#loader").stop().fadeIn();
+            if (effects.loader !== false){
+                $("#loader").stop().fadeIn(effects.fadeTime);
+            }
 
             // Make all content (excluding the loader) non-visible
             $("#content").children().filter(function(i){
                 return this != $("#loader")[0];
-            }).stop().fadeOut();
+            }).stop().fadeOut(effects.fadeTime);
         }else{
             $("#loader").stop().show();
         }
@@ -255,8 +265,9 @@ var ui = (function(){
         currentView = newView;
 
         if (effects.fade){
-            $("#loader").stop().fadeOut();
-            $("#" + newView).stop().fadeIn();
+            effects.fadeTime = effects.fadeTime || 400;
+            $("#loader").stop().fadeOut(effects.fadeTime);
+            $("#" + newView).stop().fadeIn(effects.fadeTime);
         }else{
             $("#loader").stop().hide();
         }
