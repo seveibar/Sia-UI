@@ -7,6 +7,7 @@ This system module uses NodeJS to interact with the host computer.
 */
 
 var fs = require('fs');
+var ipc = require("ipc");
 var child_process = require("child_process");
 
 var system = (function() {
@@ -30,36 +31,19 @@ var system = (function() {
     }
 
     function startDaemon(cmd, onFinish) {
-        // TODO: Allow arguments from config to daemon
-        var daemonProcess = child_process.spawn(cmd);
-        daemonProcess.stdout.on("data", daemonData);
-        daemonProcess.stderr.on("data", daemonError);
-        daemonProcess.on("close", daemonClosed);
+        ipc.send("start-daemon");
 
         // TODO: determine when daemon is ready to receive requests
         setTimeout(onFinish, 400);
     }
 
-    // Catchs all messages from daemon stdout
-    // TODO: Allow hook
-    function daemonData(data) {
-        console.log("siad: " + data);
-    }
-
-    // Catchs all messages from daemon stderr
-    // TODO: Allow hook
-    function daemonError(data) {
-        console.error("siad: " + data);
-    }
-
-    // Called when daemon process ends
-    // TODO: Allow hook
-    function daemonClosed() {
-        console.error("SIAD CLOSED");
+    function stopDaemon() {
+        ipc.send("stop-daemon");
     }
 
     return {
         "getUIConfig": getUIConfig,
-        "startDaemon": startDaemon
+        "startDaemon": startDaemon,
+        "stopDaemon": stopDaemon
     };
 })();
