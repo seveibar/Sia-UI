@@ -962,30 +962,6 @@ body {
   color: #9e9e9e;
   font-size: 32px;
 }
-#footer {
-  padding: 30px;
-  text-align: center;
-}
-#footer .link-list {
-  padding-top: 6px;
-}
-#footer .link-list .item {
-  display: inline-block;
-  color: #757575;
-  padding: 6px;
-  margin-left: 6px;
-  font-size: 18px;
-  text-align: center;
-}
-#footer .link-list .item:hover {
-  cursor: pointer;
-  color: #9e9e9e;
-}
-@media (min-width: 992px) {
-  #footer .link-list {
-    text-align: right;
-  }
-}
 ::-webkit-scrollbar {
   width: 8px;
 }
