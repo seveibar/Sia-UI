@@ -880,10 +880,11 @@ body {
   padding: 10px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #757575;
+  color: #9e9e9e;
 }
 .header-button:hover {
   cursor: pointer;
+  color: #757575;
   background-color: #e0e0e0;
 }
 #header #logo-container {
