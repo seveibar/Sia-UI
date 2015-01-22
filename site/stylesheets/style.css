@@ -865,12 +865,12 @@ body {
   font-size: 18px;
 }
 #header {
-  height: 120px;
-  background-color: #4eb980;
+  height: 80px;
+  background-color: #eeeeee;
   color: #fafafa;
 }
 #button-container {
-  padding-top: 36px;
+  padding-top: 20px;
   text-align: right;
 }
 .header-button {
@@ -879,13 +879,15 @@ body {
   padding: 10px;
   padding-left: 15px;
   padding-right: 15px;
+  color: #757575;
 }
 .header-button:hover {
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #e0e0e0;
 }
 #header #logo-container {
-  padding-top: 32px;
+  padding-left: 32px;
+  padding-top: 12px;
   font-size: 36px;
 }
 #header .header-button i {
