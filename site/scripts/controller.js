@@ -5,16 +5,21 @@ var controller = (function() {
     var uiConfig;
 
     function init() {
-        update();
-        addListeners();
-        setInterval(function() {
-            update();
-        }, 250);
+        system.getUIConfig(function(config) {
+            uiConfig = config;
 
-        // Wait two seconds then check for a Sia client update
-        setTimeout(function() {
-            promptUserIfUpdateAvailable();
-        }, 2000);
+            update();
+            addListeners();
+
+            setInterval(function() {
+                update();
+            }, 250);
+
+            // Wait two seconds then check for a Sia client update
+            setTimeout(function() {
+                promptUserIfUpdateAvailable();
+            }, 2000);
+        });
     }
 
     function promptUserIfUpdateAvailable() {
@@ -30,18 +35,18 @@ var controller = (function() {
     }
 
     function checkForUpdate(callback) {
-        $.getJSON("/update/check", callback);
+        $.getJSON(uiConfig.siad_addr + "/update/check", callback);
     }
 
     function updateClient(version) {
-        $.get("/update/apply", {
+        $.get(uiConfig.siad_addr + "/update/apply", {
             version: version
         });
     }
 
     function httpApiCall(url, params, callback, errorCallback) {
         params = params || {};
-        $.getJSON(url, params, function(data) {
+        $.getJSON(uiConfig.siad_addr + url, params, function(data) {
             if (callback) callback(data);
         }).error(function(err) {
             if (!errorCallback) {
@@ -154,7 +159,7 @@ var controller = (function() {
     var runningIncomeRateAverage = 0;
 
     function updateWallet(callback) {
-        $.getJSON("/wallet/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/wallet/status", function(response) {
             data.wallet = {
                 "Balance": response.Balance,
                 "FullBalance": response.FullBalance,
@@ -176,7 +181,7 @@ var controller = (function() {
     }
 
     function updateMiner(callback) {
-        $.getJSON("/miner/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/miner/status", function(response) {
             var timeDifference = (Date.now() - lastUpdateTime) * 1000;
             var balance = data.wallet ? data.wallet.Balance : 0;
             var balanceDifference = balance - lastBalance;
@@ -203,7 +208,7 @@ var controller = (function() {
     }
 
     function updateStatus(callback) {
-        $.getJSON("/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/status", function(response) {
             data.status = response;
             updateUI();
             if (callback) callback();
@@ -211,7 +216,7 @@ var controller = (function() {
     }
 
     function updateHost(callback) {
-        $.getJSON("/host/config", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/host/config", function(response) {
             data.host = {
                 "HostSettings": response.Announcement
             };
@@ -223,7 +228,7 @@ var controller = (function() {
     }
 
     function updateFile(callback) {
-        $.getJSON("/file/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/file/status", function(response) {
             data.file = {
                 "Files": response.Files || []
             };
@@ -235,7 +240,7 @@ var controller = (function() {
     }
 
     function updatePeer(callback) {
-        $.getJSON("/peer/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/peer/status", function(response) {
             data.peer = {
                 "Peers": response
             };
