@@ -23,6 +23,17 @@
 @g800:#424242;
 @g900:#212121;
 
+@c50: #E8EAF6;
+@c100: #C5CAE9;
+@c200: #9FA8DA;
+@c300: #7986CB;
+@c400: #5C6BC0;
+@c500: #3F51B5;
+@c600: #3949AB;
+@c700: #303F9F;
+@c800: #283593;
+@c900: #1A237E;
+
 body{
     margin:0px;
     padding:0px;
@@ -101,12 +112,19 @@ body{
     display:inline-block;
     padding-left:16px;
 }
-.large-sidebar .item.current, .small-sidebar .item.current{
-    background-color:@g50;
+.large-sidebar .item, .small-sidebar .item{
+    -webkit-transition:background-color 200ms, color 200ms;
 }
-.large-sidebar .item:hover{
-    background-color:@g50;
+.large-sidebar .item:hover, .small-sidebar .item:hover{
+    background-color:@g200;
     cursor:pointer;
+}
+.large-sidebar .item.current, .small-sidebar .item.current{
+    background-color:@c600;
+    color:#fff;
+}
+.large-sidebar .item.current:hover, .small-sidebar .item.current:hover{
+    background-color:@c600;
 }
 .small-sidebar{
     text-align:center;
