@@ -1,11 +1,13 @@
 #header
     .container
-        .row
-            #logo-container.col-xs-6
-                %img{:src=>"assets/sia.svg",:height=>"50",:style=>"opacity:.5;"}
-            #button-container.col-xs-6
-                -# #balance-button.header-button $4.60010
-                -# #balance-button.header-button +&micro;10.15
-                .header-button.update-button
-                    Check for Update
-                    %i.fa.fa-arrow-circle-o-up
+        .pure-g
+            .pure-u-2-3
+                #logo-container
+                    %img{:src=>"assets/sia.svg",:height=>"50",:style=>"opacity:.5;"}
+            .pure-u-1-3
+                #button-container
+                    -# #balance-button.header-button $4.60010
+                    -# #balance-button.header-button +&micro;10.15
+                    .header-button.update-button
+                        Check for Update
+                        %i.fa.fa-arrow-circle-o-up

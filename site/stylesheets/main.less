@@ -45,7 +45,13 @@ body{
     // font-family: 'Source Sans Pro', sans-serif;
     font-weight:300;
     font-size:18px;
-    overflow:hidden;
+    // overflow:hidden;
+}
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight:300;
 }
 
 #sidebar-and-content{
@@ -61,12 +67,13 @@ body{
     color:@g50;
 }
 #button-container{
+    padding-right:20px;
     padding-top:20px;
     text-align:right;
 }
 .header-button{
     display:inline-block;
-    margin-left:20px;
+    // margin-left:20px;
     padding:10px;
     padding-left:15px;
     padding-right:15px;
@@ -190,4 +197,48 @@ body{
 
 ::-webkit-scrollbar-thumb:hover{
     cursor:pointer;
+}
+
+// ---------------------
+// HELPERS
+// ---------------------
+
+/* pure-hidden-xs */
+@media screen and (max-width:567px) {
+    .visible-sm{display:none}
+    .visible-md{display:none}
+    .visible-lg{display:none}
+    .visible-xl{display:none}
+    .hidden-xs{display:none}
+}
+/* pure-hidden-sm */
+@media screen and (min-width:568px) and (max-width:767px) {
+    .visible-xs{display:none}
+    .visible-md{display:none}
+    .visible-lg{display:none}
+    .visible-xl{display:none}
+    .hidden-sm{display:none}
+}
+/* pure-hidden-md */
+@media screen and (min-width:768px) and (max-width:1023px) {
+    .visible-xs{display:none}
+    .visible-sm{display:none}
+    .visible-lg{display:none}
+    .visible-xl{display:none}
+    .hidden-md{display:none}
+}
+/* pure-hidden-lg */
+@media screen and (min-width:1024px) and (max-width:1279px) {
+    .visible-xs{display:none}
+    .visible-sm{display:none}
+    .visible-md{display:none}
+    .visible-xl{display:none}
+    .hidden-lg{display:none}
+}
+/* pure-hidden-xl */
+@media screen and (min-width:1280px) {
+    .visible-xs{display:none}
+    .visible-sm{display:none}
+    .visible-md{display:none}
+    .visible-lg{display:none}
 }
