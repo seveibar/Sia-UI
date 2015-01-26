@@ -56,6 +56,7 @@ html, button, input, select, textarea,
 
 #sidebar-and-content{
     box-shadow:0px 4px 4px rgba(0,0,0,.5);
+    position:relative;
 }
 
 // ---------------------
@@ -102,6 +103,12 @@ html, button, input, select, textarea,
     background-color:#fff;
     color:@g700;
     padding:0;
+    width:240px;
+    height:700px;
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:1000;
 }
 .large-sidebar{
     height:720px;
@@ -171,6 +178,7 @@ html, button, input, select, textarea,
     position:relative;
     overflow-x:hidden;
     overflow-y:hidden;
+    padding-left:240px; // sidebar padding
 }
 #content #loader{
     position:absolute;

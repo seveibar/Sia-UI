@@ -42,9 +42,9 @@
     %body
         = Haml::Engine.new(File.read('markup/header.haml')).render
         .container
-            #sidebar-and-content.row
+            #sidebar-and-content
                 = Haml::Engine.new(File.read('markup/sidebar.haml')).render
-                #content.col-md-9
+                #content
                     #loader
                         %i.fa.fa-circle-o-notch.fa-spin
                     = Haml::Engine.new(File.read('markup/pages/overview.haml')).render
