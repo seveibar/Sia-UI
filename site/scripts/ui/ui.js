@@ -258,9 +258,28 @@ var ui = (function(){
             }
 
             // Make all content (excluding the loader) non-visible
-            $("#content").children().filter(function(i){
+            var pages = $("#content").children().filter(function(i){
                 return this != $("#loader")[0];
-            }).stop().fadeOut(effects.fadeTime);
+            });
+
+            // Animate the old header up
+            // TODO animating all headers rn, but only the current header should
+            // move up
+            pages.find(".header > *").stop().css({"ytranslation": 0});
+            pages.find(".header > *").animate({
+                "ytranslation": 1
+            },{
+                step:function(t){
+                    $(this).css({"-webkit-transform": "translateY("+(t*-80)+"px)"});
+                },
+                duration:effects.fadeTime
+            });
+
+            var pageContents = pages.children().not(".header");
+
+            pageContents.stop().fadeOut(effects.fadeTime, function(){
+                $(this).parent().hide();
+            });
         }else{
             $("#loader").stop().show();
         }
@@ -273,7 +292,20 @@ var ui = (function(){
         if (effects.fade){
             effects.fadeTime = effects.fadeTime || 400;
             $("#loader").stop().fadeOut(effects.fadeTime);
-            $("#" + newView).stop().fadeIn(effects.fadeTime);
+
+            // Animate the header up
+            $("#" + newView).find(".header > *").stop().css({"ytranslation": 0});
+            $("#" + newView).find(".header > *").animate({
+                "ytranslation": 1
+            },{
+                step:function(t){
+                    $(this).css({"-webkit-transform": "translateY("+(t*-80+80)+"px)"});
+                },
+                duration:effects.fadeTime
+            });
+
+            $("#" + newView).children().not(".header").stop().fadeIn(effects.fadeTime);
+            $("#" + newView).show();
         }else{
             $("#loader").stop().hide();
         }
