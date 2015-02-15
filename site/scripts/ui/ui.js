@@ -270,7 +270,7 @@ var ui = (function(){
                 "ytranslation": 1
             },{
                 step:function(t){
-                    $(this).css({"-webkit-transform": "translateY("+(t*-80)+"px)"});
+                    $(this).css({"opacity": 1-t});
                 },
                 duration:effects.fadeTime
             });
@@ -300,7 +300,7 @@ var ui = (function(){
                 "ytranslation": 1
             },{
                 step:function(t){
-                    $(this).css({"-webkit-transform": "translateY("+(t*-80+80)+"px)"});
+                    $(this).css({"opacity": t});
                 },
                 duration:effects.fadeTime
             });
