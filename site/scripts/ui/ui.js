@@ -277,9 +277,10 @@ var ui = (function(){
 
             var pageContents = pages.children().not(".header");
 
-            pageContents.stop().fadeOut(effects.fadeTime, function(){
-                $(this).parent().hide();
-            });
+            pageContents.stop().fadeOut(effects.fadeTime);
+            setTimeout(function(){
+                pages.hide();
+            }, effects.fadeTime);
         }else{
             $("#loader").stop().show();
         }
