@@ -18,6 +18,8 @@ sudo apt-get install ruby-haml node-less
 
 This is a quick walk through the structure of the project.
 
+### Root Directory
+
 At the top level of the project there are two directories...
 
 `lib`
@@ -35,13 +37,19 @@ There are also several files in the root directory of the project that are impor
 
 The `site` directory is essentially a website, however, atom-shell allows scripts to call on NodeJS modules which allows the website access to the file system, shell and other native functions that you would normally not have access to in a web application.
 
+### Site Directory
+
 Within the `site` directory there are several important folders and files...
 
 `index.html` This is where the web application begins, this file should never be editted as it is generated from the markup directory (if you don't have this file, you need to build the application using `make`)
+
 `assets` contains static data for the site (images etc.)
 `libraries` external javascript/css libraries (jquery, font awesome...)
+
 `markup` contains all the markup/elements that make up the application
+
 `scripts` contains all the scripts and logic used to run the application
+
 `stylesheets` contains all the styles to make the application pretty
 
 ### Organization of application windows/tabs
