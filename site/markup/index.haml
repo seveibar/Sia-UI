@@ -37,10 +37,10 @@
             });
 
     %body
-        = Haml::Engine.new(File.read('markup/header.haml')).render
+        -# = Haml::Engine.new(File.read('markup/header.haml')).render
         .container
             #sidebar-and-content
-                = Haml::Engine.new(File.read('markup/sidebar.haml')).render
+                -# = Haml::Engine.new(File.read('markup/sidebar.haml')).render
                 #content
                     #loader
                         %i.fa.fa-circle-o-notch.fa-spin
@@ -53,4 +53,4 @@
                     -# = Haml::Engine.new(File.read('markup/pages/transfer-funds.haml')).render
                     -# = Haml::Engine.new(File.read('markup/pages/upload-file.haml')).render
                     -# = Haml::Engine.new(File.read('markup/pages/network.haml')).render
-        = Haml::Engine.new(File.read('markup/hovering.haml')).render
+        -# = Haml::Engine.new(File.read('markup/hovering.haml')).render
