@@ -37,20 +37,20 @@
             });
 
     %body
-        -# = Haml::Engine.new(File.read('markup/header.haml')).render
+        +include "markup/header.haml"
         .container
             #sidebar-and-content
-                -# = Haml::Engine.new(File.read('markup/sidebar.haml')).render
+                +include "markup/sidebar.haml"
                 #content
                     #loader
                         %i.fa.fa-circle-o-notch.fa-spin
-                    -# = Haml::Engine.new(File.read('markup/pages/overview.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/mining.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/manage-account.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/money.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/files.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/hosting.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/transfer-funds.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/upload-file.haml')).render
-                    -# = Haml::Engine.new(File.read('markup/pages/network.haml')).render
-        -# = Haml::Engine.new(File.read('markup/hovering.haml')).render
+                    +include "markup/pages/overview.haml"
+                    +include "markup/pages/mining.haml"
+                    +include "markup/pages/manage-account.haml"
+                    +include "markup/pages/money.haml"
+                    +include "markup/pages/files.haml"
+                    +include "markup/pages/hosting.haml"
+                    +include "markup/pages/transfer-funds.haml"
+                    +include "markup/pages/upload-file.haml"
+                    +include "markup/pages/network.haml"
+        +include "markup/hovering.haml"
