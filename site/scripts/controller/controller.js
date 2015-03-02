@@ -88,7 +88,8 @@ var controller = (function() {
             httpApiCall("/miner/stop");
         });
         ui.addListener("save-host-config", function(hostSettings) {
-            httpApiCall("/host/setconfig", hostSettings);
+            console.log(hostSettings);
+            httpApiCall("/host/config", hostSettings);
         });
         ui.addListener("send-money", function(info) {
             ui.wait();
@@ -222,7 +223,7 @@ var controller = (function() {
     }
 
     function updateHost(callback) {
-        $.getJSON(uiConfig.siad_addr + "/host/config", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/host/status", function(response) {
             data.host = {
                 "HostSettings": response
             };
