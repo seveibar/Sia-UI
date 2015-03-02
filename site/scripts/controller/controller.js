@@ -224,7 +224,7 @@ var controller = (function() {
     function updateHost(callback) {
         $.getJSON(uiConfig.siad_addr + "/host/config", function(response) {
             data.host = {
-                "HostSettings": response.Announcement
+                "HostSettings": response
             };
             updateUI();
             if (callback) callback();
