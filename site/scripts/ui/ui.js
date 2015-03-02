@@ -340,6 +340,8 @@ var ui = (function(){
 
         // To avoid movement upon removal
         newElement.before(oldElement);
+        newElement.find(".header > *").stop().css({"opacity":1});
+        newElement.children().not(".header").stop().show().css({"opacity":1});
 
         var slideDistance = oldElement.width();
         var heightDifference = oldElement.offset().top - newElement.offset().top;
