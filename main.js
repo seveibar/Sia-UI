@@ -23,9 +23,11 @@ app.on('ready', function() {
     setupIPCHandlers();
 
     mainWindow = new BrowserWindow({
-        width: 1200,
-        height: 800,
-        title: "Sia"
+        "width": 1200,
+        "height": 800,
+        "min-width": 800,
+        "min-height": 600,
+        "title": "Sia"
     });
 
     mainWindow.loadUrl('file://' + __dirname + '/site/index.html');
