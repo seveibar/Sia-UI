@@ -3,9 +3,9 @@ ui._hosting = (function(){
     var view, ePropBlueprint, ePreset16GB, ePreset32GB, ePreset64GB, eProps, eControl, eSave, eReset;
 
     // TODO: make this an associative array for readability
-    var editableProps = ["TotalStorage","MaxFilesize","MaxDuration","MinTolerance","Price","Burn"];
-    var propUnits = ["MB", "KB", "Day", "# Contracts", "SC", "SC"];
-    var propConversion = [1/1000/1000, 1/1000, 10/60/24, 1, 1, 1];
+    var editableProps = ["TotalStorage","MaxFilesize","MaxDuration"];
+    var propUnits = ["MB", "KB", "Day", "SC"];
+    var propConversion = [1/1000/1000, 1/1000, 10/60/24, 1];
 
     var lastHostSettings;
 
