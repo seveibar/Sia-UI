@@ -25,8 +25,8 @@ app.on('ready', function() {
     mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
-        "min-width": 1200,
-        "min-height": 800,
+        "min-width": 800,
+        "min-height": 600,
         title: "Sia"
     });
 
