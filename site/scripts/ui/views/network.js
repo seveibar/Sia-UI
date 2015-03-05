@@ -1,8 +1,6 @@
-'use strict';
 ui._network = (function(){
 
 
-//	var view, eItems, eItemBlueprint, eAddPeer, eApply;
     function init(){
         view = $("#network");
         eItems = $();
@@ -29,7 +27,7 @@ ui._network = (function(){
         ui._trigger("update-peers", peerAddresses);
     }
 
-    function addPeer(peerAddr, b, c){
+    function addPeer(peerAddr){
         var eItem = eItemBlueprint.clone().removeClass("blueprint");
         eItemBlueprint.parent().append(eItem);
         eItem.find(".cancel").click(function(){
@@ -44,10 +42,12 @@ ui._network = (function(){
 
     function onViewOpened(data){
 
-        if (data && data.peer){
+        if (data.peer){
             eItems.remove();
             eItems = $();
-            data.peer.Peers.forEach(addPeer);
+            data.peer.Peers.forEach(function(peerAddr){
+                addPeer(peerAddr);
+            });
         }
 
     }
