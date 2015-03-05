@@ -1,5 +1,7 @@
 'use strict';
 ui._network = (function(){
+
+	
 //	var view, eItems, eItemBlueprint, eAddPeer, eApply;
     function init(){
         view = $("#network");
