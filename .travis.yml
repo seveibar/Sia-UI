@@ -1,0 +1,4 @@
+language: c
+before_install: sudo apt-get install npm
+install: npm install -g coffee-script haml-coffee lessc
+script: make
