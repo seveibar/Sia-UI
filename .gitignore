@@ -1,3 +1,5 @@
 *.html
 sia.wallet
 *.css
+node_modules
+atom-shell
