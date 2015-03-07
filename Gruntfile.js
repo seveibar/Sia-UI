@@ -2,7 +2,7 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		execute: {
+		haml: {
 	        target: {
 	            src: ['build-haml.js']
 	        }
@@ -21,6 +21,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-contrib-less');
 
-	grunt.registerTask('default', ['less']);
+	grunt.registerTask('default', ['haml','less']);
 
 };
