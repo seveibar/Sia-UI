@@ -1,6 +1,5 @@
 ui._network = (function(){
-
-
+    var view, eItems, eItemBlueprint, eAddPeer, eApply;
     function init(){
         view = $("#network");
         eItems = $();
@@ -42,12 +41,10 @@ ui._network = (function(){
 
     function onViewOpened(data){
 
-        if (data.peer){
+        if (data && data.peer){
             eItems.remove();
             eItems = $();
-            data.peer.Peers.forEach(function(peerAddr){
-                addPeer(peerAddr);
-            });
+            data.peer.Peers.forEach(addPeer);
         }
 
     }

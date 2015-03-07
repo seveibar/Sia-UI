@@ -1,5 +1,10 @@
 {
-    "name": "Sia-UI",
-    "version": "0.2.0",
-    "main": "main.js"
+  "name": "Sia-UI",
+  "version": "0.2.0",
+  "main": "main.js",
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "haml-coffee": "^1.14.1",
+    "less": "^2.4.0"
+  }
 }
