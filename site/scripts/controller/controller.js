@@ -248,9 +248,7 @@ var controller = (function() {
 
     function updatePeer(callback) {
         $.getJSON(uiConfig.siad_addr + "/peer/status", function(response) {
-            data.peer = {
-                "Peers": response
-            };
+            data.peer = response;
             updateUI();
             if (callback) callback();
         }).error(function() {
