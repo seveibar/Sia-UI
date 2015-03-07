@@ -1,3 +1,4 @@
 *.html
 sia.wallet
 *.css
+node_modules
