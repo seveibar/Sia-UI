@@ -21,15 +21,12 @@ ui._uploadFile = ui["_upload-file"] = (function(){
             $("#fileupload").fileupload({
                 datatype: "plaintext",
                 add: function(e, data){
+                    console.log(data.files);
                     eFileName.text(data.files[0].name);
+                    var filePath = data.files[0].path;
                     eStep2.slideDown();
                     view.find(".button.upload").off("click").click(function(){
-                        data.formData = {
-                            "nickname": eDescription.val(),
-                            "pieces": 12
-                        };
-                        ui.notify("Attempting upload", "upload");
-                        data.submit();
+                        ui._trigger("upload-file", filePath, eDescription.val());
                     });
                 },
                 done: function(e, data){

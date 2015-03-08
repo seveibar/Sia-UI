@@ -123,6 +123,16 @@ var controller = (function() {
                 "filename": fileNickname
             });
         });
+        ui.addListener("upload-file", function(filePath, nickName){
+            ui.notify("Uploading " + nickName + " to Sia Network", "upload");
+            httpApiCall("/renter/uploadpath", {
+                "filename": filePath,
+                "nickname": nickName,
+                "pieces": 12
+            }, function(){
+                ui.notify("File upload complete!", "success");
+            });
+        });
         ui.addListener("update-peers", function(peers) {
             ui.notify("Updating Network...", "peers");
 
