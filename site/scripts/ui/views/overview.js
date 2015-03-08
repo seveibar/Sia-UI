@@ -22,7 +22,8 @@ ui._overview = (function(){
     function update(data){
         // Second Header
         eBalance.html(util.engNotation(data.wallet.Balance) + "SC");
-        eBlockHeight.html(data.status.Height + " Blocks Mined");
+        // TODO get height working
+        // eBlockHeight.html(data.status.Height + " Blocks Mined");
     }
 
     return {

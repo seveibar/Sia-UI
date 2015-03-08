@@ -41,11 +41,11 @@ var controller = (function() {
     }
 
     function checkForUpdate(callback) {
-        $.getJSON(uiConfig.siad_addr + "/update/check", callback);
+        $.getJSON(uiConfig.siad_addr + "/daemon/update/check", callback);
     }
 
     function updateClient(version) {
-        $.get(uiConfig.siad_addr + "/update/apply", {
+        $.get(uiConfig.siad_addr + "/daemon/update/apply", {
             version: version
         });
     }
@@ -214,14 +214,6 @@ var controller = (function() {
         });
     }
 
-    function updateStatus(callback) {
-        $.getJSON(uiConfig.siad_addr + "/status", function(response) {
-            data.status = response;
-            updateUI();
-            if (callback) callback();
-        });
-    }
-
     function updateHost(callback) {
         $.getJSON(uiConfig.siad_addr + "/host/status", function(response) {
             data.host = {
@@ -235,7 +227,7 @@ var controller = (function() {
     }
 
     function updateFile(callback) {
-        $.getJSON(uiConfig.siad_addr + "/file/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/renter/status", function(response) {
             data.file = {
                 "Files": response.Files || []
             };
@@ -247,7 +239,7 @@ var controller = (function() {
     }
 
     function updatePeer(callback) {
-        $.getJSON(uiConfig.siad_addr + "/peer/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/gateway/status", function(response) {
             data.peer = response;
             updateUI();
             if (callback) callback();
@@ -259,14 +251,13 @@ var controller = (function() {
     function update() {
         updateWallet();
         updateMiner();
-        updateStatus();
         updateHost();
         updateFile();
         updatePeer();
     }
 
     function updateUI() {
-        if (data.wallet && data.miner && data.status && data.host && data.file) {
+        if (data.wallet && data.miner && data.host && data.file) {
             ui.update(data);
         }
     }
