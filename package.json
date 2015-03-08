@@ -11,5 +11,8 @@
     "grunt-shell": "^1.1.2",
     "haml-coffee": "^1.14.1",
     "less": "^2.4.0"
+  },
+  "scripts": {
+    "test": "grunt"
   }
 }
