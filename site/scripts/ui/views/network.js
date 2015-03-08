@@ -44,7 +44,9 @@ ui._network = (function(){
         if (data && data.peer){
             eItems.remove();
             eItems = $();
-            data.peer.Peers.forEach(addPeer);
+            if (data.peer.Peers != null){
+                data.peer.Peers.forEach(addPeer);
+            }
         }
 
     }
