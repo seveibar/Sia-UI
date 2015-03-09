@@ -30,6 +30,7 @@ var controller = (function() {
 
     function promptUserIfUpdateAvailable() {
         checkForUpdate(function(update) {
+            data.Version = update.Version;
             if (update.Available) {
                 ui.notify("New Sia Client Available: Click to update to " + update.Version + "!", "update", function() {
                     updateClient(update.Version);
