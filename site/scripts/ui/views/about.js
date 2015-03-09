@@ -14,14 +14,15 @@ ui._about = (function(){
     function update(data){
     }
 
-    function onViewOpen(data){
-        
+    function onViewOpened(data){
+        console.log("yyoyoyoyoyoy", data.Version);
+        view.find("#siaversion").text(data.Version);
     }
 
     return {
         "init": init,
         "update": update,
-        "onViewOpen": onViewOpen
+        "onViewOpened": onViewOpened
     };
 
 })();
