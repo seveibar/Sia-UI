@@ -2,11 +2,52 @@ ui._hosting = (function(){
 
     var view, ePropBlueprint, ePreset16GB, ePreset32GB, ePreset64GB, eProps, eControl, eSave, eReset;
 
-    // TODO: make this an associative array for readability
-    var editableProps = ["TotalStorage","MaxFilesize","MaxDuration"];
-    var propUnits = ["MB", "KB", "Day", "SC"];
-    var propConversion = [1/1000/1000, 1/1000, 10/60/24, 1];
 
+    var hostProperties = [
+        {
+            "name": "TotalStorage",
+            "unit": "MB",
+            "conversion": 1/1000/1000
+        },{
+            "name": "MinFilesize",
+            "unit": "KB",
+            "conversion": 1/1000
+        },{
+            "name": "MaxFilesize",
+            "unit": "KB",
+            "conversion": 1/1000
+        },{
+            "name": "MinDuration",
+            "unit": "Day",
+            "conversion": 10/60/24
+        },{
+            "name": "MaxDuration",
+            "unit": "Day",
+            "conversion": 10/60/24
+        },{
+            "name": "Price",
+            "unit": "SC",
+            "conversion": 1
+        },{
+            "name": "Collateral",
+            "unit": "SC",
+            "conversion": 1
+        }
+    ];
+
+    // TODO: don't generate these, just use hostProperties
+    var editableProps = hostProperties.map(function(obj){
+        return obj["name"];
+    });
+    var propUnits = hostProperties.map(function(obj){
+        return obj["unit"];
+    });
+    var propConversion = hostProperties.map(function(obj){
+        return obj["conversion"];
+    });
+    // var editableProps = ["TotalStorage","MaxFilesize","MaxDuration"];
+    // var propUnits = ["MB", "KB", "Day"];
+    // var propConversion = [1/1000/1000, 1/1000, 10/60/24, 1];
     var lastHostSettings;
 
     function init(){
@@ -43,7 +84,7 @@ ui._hosting = (function(){
             ui._tooltip(this, "Reseting");
             for (var i = 0;i < editableProps.length;i ++){
                 var item = $(eProps[i]);
-                var value = parseFloat(data.host.HostSettings[editableProps[i]]);
+                var value = parseFloat(ui._data.host.HostSettings[editableProps[i]]);
                 item.find(".value").text(value * propConversion[i]);
             }
         });
