@@ -1,18 +1,14 @@
 # Developers Guide
 
-## Getting the environment setup
+## Environment Setup
 
-1. Get the [latest release of Sia](TODO)
-2. Download [atom-shell](https://github.com/atom/atom-shell/releases)
-3. Extract atom-shell (optionally add it to your path, the `atom` executable within the directory is what you use to run atom-shell applications)
-3. Clone Sia-UI `git clone https://github.com/NebulousLabs/Sia-UI.git`
-4. Install Sia-UI Dependencies
-```
-# With ubuntu
-sudo apt-get install ruby-haml node-less
-```
-5. Make the project using `make` in the sia-ui directory
-5. Execute `/path/to/atom-shell/atom /path/to/sia-ui`
+1. Download the [latest release of Sia](https://sia-builder.cyrozap.com/job/sia/lastSuccessfulBuild/)
+2. Clone Sia-UI: `git clone https://github.com/NebulousLabs/Sia-UI.git`
+3. Install npm
+   - Ubuntu: `sudo apt-get install npm`
+   - Mac OS X: `brew install node`
+4. Install the dependencies by running `npm install` in the Sia-UI directory
+5. Start the UI by running `npm start`
 
 ## Project Structure
 
