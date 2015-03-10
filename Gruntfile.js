@@ -36,6 +36,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-shell');
 
     grunt.registerTask('default', ['execute','less', 'download-atom-shell']);
-    grunt.registerTask('run', ['shell']);
+    grunt.registerTask('test', ['execute', 'less']);
+    grunt.registerTask('run', ['default', 'shell']);
 
 };
