@@ -1,3 +1,4 @@
+var path = require("path");
 module.exports = function(grunt){
 
     grunt.initConfig({
@@ -24,7 +25,7 @@ module.exports = function(grunt){
 
         shell: {
             target: {
-                command: 'atom-shell/atom .'
+                command: path.join('atom-shell','atom') + ' .'
             }
         }
 
