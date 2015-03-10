@@ -119,7 +119,7 @@ var controller = (function() {
         });
         ui.addListener("download-file", function(fileNickname) {
             ui.notify("Downloading " + fileNickname + " to Downloads folder", "download");
-            httpApiCall("/file/download", {
+            httpApiCall("/renter/download", {
                 "nickname": fileNickname,
                 "filename": fileNickname
             });
