@@ -7,7 +7,7 @@ This is the user interface for [Sia](https://github.com/NebulousLabs/Sia), it is
 
 - [siad](https://github.com/NebulousLabs/Sia)
 
-There are prebuilt binaries [nowhere](https://github.com/NebulousLabs/Sia-UI/issues/7)
+There are prebuilt binaries [here](https://sia-builder.cyrozap.com/job/sia/lastSuccessfulBuild/).
 
 ## Building and Running
 
