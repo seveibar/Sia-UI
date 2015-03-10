@@ -13,6 +13,10 @@
     "haml-coffee": "^1.14.1",
     "less": "^2.4.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/NebulousLabs/Sia-UI.git"
+  },
   "scripts": {
     "start": "node_modules/grunt-cli/bin/grunt run",
     "test": "node_modules/grunt-cli/bin/grunt test"
