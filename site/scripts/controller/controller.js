@@ -249,6 +249,20 @@ var controller = (function() {
         });
     }
 
+    function updateConsensus(callback) {
+        $.getJSON(uiConfig.siad_addr + "/consensus/status", function(response) {
+            data.consensus = {
+                "Height": response.Height,
+                "CurrentBlock": response.CurrentBlock,
+                "Target": response.Target
+            };
+            updateUI();
+            if (callback) callback();
+        }).error(function() {
+            console.log(arguments);
+        });
+    }
+
     function updatePeer(callback) {
         $.getJSON(uiConfig.siad_addr + "/gateway/status", function(response) {
             data.peer = response;
@@ -264,11 +278,12 @@ var controller = (function() {
         updateMiner();
         updateHost();
         updateFile();
+        updateConsensus();
         updatePeer();
     }
 
     function updateUI() {
-        if (data.wallet && data.miner && data.host && data.file) {
+        if (data.wallet && data.miner && data.host && data.file && data.consensus) {
             ui.update(data);
         }
     }
