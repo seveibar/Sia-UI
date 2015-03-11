@@ -20,7 +20,14 @@ var util = (function(){
     function siacoin(mcoin){
         return mcoin / siaConversionFactor;
     }
-    function fsiacoin(mcoin){
+    function fsiacoin(mcoin, l){
+        if (!l) l = 10;
+        var string = siacoin(mcoin).toFixed(l);
+
+        // Indicate if the user has some value
+        if (mcoin > 0 && string == (0).toFixed(l)){
+            string = (0).toFixed(l).substring(0,l-1) + "1";
+        }
         return siacoin(mcoin) + "SC";
     }
 
@@ -35,6 +42,8 @@ var util = (function(){
     return {
         "engNotation": engNotation,
         "USDConvert": USDConvert,
-        "limitPrecision": limitPrecision
+        "limitPrecision": limitPrecision,
+        "siacoin": siacoin,
+        "fsiacoin": fsiacoin
     };
 })();
