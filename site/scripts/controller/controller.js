@@ -97,7 +97,7 @@ var controller = (function() {
             var address = info.to.address.replace(/[^A-Fa-f0-9]/g, "");
             httpApiCall("/wallet/send", {
                 "amount": info.from.amount,
-                "dest": address
+                "destination": address
             }, function(data) {
                 updateWallet(function() {
                     ui.stopWaiting();
@@ -121,15 +121,14 @@ var controller = (function() {
             ui.notify("Downloading " + fileNickname + " to Downloads folder", "download");
             httpApiCall("/renter/download", {
                 "nickname": fileNickname,
-                "filename": fileNickname
+                "destination": fileNickname
             });
         });
         ui.addListener("upload-file", function(filePath, nickName){
             ui.notify("Uploading " + nickName + " to Sia Network", "upload");
-            httpApiCall("/renter/uploadpath", {
-                "filename": filePath,
+            httpApiCall("/renter/upload", {
+                "source": filePath,
                 "nickname": nickName,
-                "pieces": 12
             }, function(){
                 ui.notify("File upload complete!", "success");
             });
@@ -139,7 +138,7 @@ var controller = (function() {
 
             function addPeer(peerAddr) {
                 httpApiCall("/peer/add", {
-                    "addr": peerAddr
+                    "address": peerAddr
                 }, function() {
                     ui.notifySmall("Successfully added peer: " + peerAddr, "success");
                 }, function(err) {
@@ -149,7 +148,7 @@ var controller = (function() {
 
             function removePeer(peerAddr) {
                 httpApiCall("/peer/remove", {
-                    "addr": peerAddr
+                    "address": peerAddr
                 }, function() {
                     ui.notifySmall("Successfully removed peer: " + peerAddr, "success");
                 }, function(err) {
