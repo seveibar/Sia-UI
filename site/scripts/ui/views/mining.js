@@ -1,7 +1,7 @@
 ui._mining = (function(){
 
     var view, eMiningStatus, eIncomeRate, eActiveMiners, eActiveMinerCount, eAddMiner,
-        eRemoveMiner, eToggleMining, eAccountName, eBalance, eUSDBalance;
+        eRemoveMiner, eToggleMining, eAccountName, eBalance;
 
     function init(){
         view = $("#mining");
@@ -14,7 +14,6 @@ ui._mining = (function(){
         eToggleMining = view.find(".toggle-mining");
         eAccountName = view.find(".account-name");
         eBalance = view.find(".account-info .amt");
-        eUSDBalance = view.find(".account-info .amtusd");
 
         addEvents();
     }
@@ -67,14 +66,11 @@ ui._mining = (function(){
         }
 
         eActiveMinerCount.text(data.miner.RunningThreads);
-        eIncomeRate.html(util.engNotation(data.miner.IncomeRate) + "SC/s");
+        eIncomeRate.html(util.fsiacoin(data.miner.IncomeRate) + "/s");
 
         eAccountName.text(data.miner.AccountName);
 
-        eBalance.text(util.engNotation(data.miner.Balance));
-        if (data.miner.USDBalance !== undefined){
-            eUSDBalance.html("&asymp; " + util.engNotation(data.wallet.USDBalance) + "USD");
-        }
+        eBalance.text(util.fsiacoin(data.miner.Balance));
 
     }
 

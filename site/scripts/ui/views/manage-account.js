@@ -1,6 +1,6 @@
 ui._manageAccount = ui["_manage-account"] = (function(){
 
-    var view,eBackToMoney, eBalance, eUSDBalance, eAccountName, eAddFunds, eWithdraw,
+    var view,eBackToMoney, eBalance, eAccountName, eAddFunds, eWithdraw,
         eAddressBlueprint,eAddresses,eTransactionBlueprint, eTransactions, eCreateAddress,
         eSendMoney, eTransferFunds, eDeleteAccount, eAddressDropdown, eTransactionDropdown;
 
@@ -11,7 +11,6 @@ ui._manageAccount = ui["_manage-account"] = (function(){
         view = $("#manage-account");
 
         eBalance = view.find(".sumdisplay .amt");
-        eUSDBalance = view.find(".sumdisplay .amtusd");
         eAccountName = view.find(".account-name");
         eBackToMoney = $("#back-to-money");
         eCreateAddress = view.find(".create-address");
@@ -89,14 +88,11 @@ ui._manageAccount = ui["_manage-account"] = (function(){
         }
 
         // TODO this balance should represent the account's balance
-        eBalance.html(util.engNotation(account.Balance) + "SC");
+        eBalance.html(util.fsiacoin(account.Balance));
         eBalance.off("hover");
         eBalance.click(function(){
-            ui._tooltip(this, account.Balance + " SC", {left:0,top:30});
+            ui._tooltip(this, util.fsiacoin(account.Balance), {left:0,top:30});
         });
-        if (account.USDBalance !== undefined){
-            eUSDBalance.html("&asymp; " + util.engNotation(account.USDBalance) + "USD");
-        }
 
         // Populate addresses
         eAddresses.remove();

@@ -1,13 +1,12 @@
 ui._money = (function(){
 
-    var view, eBalance, eUSDBalance, eAddFunds, eWithdrawFunds, eItems, eAddAccount,
+    var view, eBalance, eAddFunds, eWithdrawFunds, eItems, eAddAccount,
         eTransferFunds, eDeleteAccount;
 
     function init(){
         view = $("#money");
 
         eBalance = view.find(".amt");
-        eUSDBalance = view.find(".amtusd");
 
         eAddFunds = view.find(".add-funds");
         eWithdrawFunds = view.find(".withdraw");
@@ -51,10 +50,7 @@ ui._money = (function(){
     }
 
     function onViewOpened(data){
-        eBalance.html(util.engNotation(data.wallet.Balance) + "SC");
-        if (data.wallet.USDBalance !== undefined){
-            eUSDBalance.html("&asymp; " + util.engNotation(data.wallet.USDBalance) + "USD");
-        }
+        eBalance.html(util.siacoin(data.wallet.Balance));
 
         eItems.remove();
         eItems = $();
@@ -66,10 +62,7 @@ ui._money = (function(){
             var item = blueprint.clone().removeClass("blueprint");
             blueprint.parent().append(item);
             item.find(".name").text(account.Name);
-            item.find(".money").text(util.engNotation(account.Balance,10) + "SC");
-            item.find(".money").hover(function(){
-                ui._tooltip(this, util.engNotation(account.USDBalance) + "USD");
-            });
+            item.find(".money").text(util.fsiacoin(account.Balance));
             accountElements.push(item[0]);
         });
         eItems = $(accountElements);

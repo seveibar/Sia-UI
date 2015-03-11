@@ -2,6 +2,7 @@ var util = (function(){
 
     var pSI = ["", "k", "M", "G", "T"];
     var nSI = ["", "m", "&micro;", "&nano;", "&pico;"];
+    var siaConversionFactor = Math.pow(10,24);
 
     function engNotation(number, precision){
         if (number === 0) return "0.0000 ";
@@ -14,6 +15,13 @@ var util = (function(){
         var si = degree > 0 ? pSI[degree] : nSI[degree * -1];
 
         return numberString.slice(0,precision + 1) + " " + si;
+    }
+
+    function siacoin(mcoin){
+        return mcoin / siaConversionFactor;
+    }
+    function fsiacoin(mcoin){
+        return siacoin(mcoin) + "SC";
     }
 
     function USDConvert(balance){
