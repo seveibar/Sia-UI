@@ -18,7 +18,7 @@
     "url": "git://github.com/NebulousLabs/Sia-UI.git"
   },
   "scripts": {
-    "start": "node_modules/grunt-cli/bin/grunt run",
-    "test": "node_modules/grunt-cli/bin/grunt test"
+    "start": "grunt run",
+    "test": "grunt test"
   }
 }
