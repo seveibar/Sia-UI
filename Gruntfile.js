@@ -33,7 +33,6 @@ module.exports = function(grunt){
     grunt.registerTask('default', ['build', 'download-atom-shell']);
     grunt.registerTask('build', ['execute', 'less']);
     grunt.registerTask('test', ['build']);
-    //grunt.registerTask('run', ['default', 'shell']);
     grunt.registerTask('run', "Running Sia UI with atom shell...", function(){
         grunt.task.run("default");
         var cp = require("child_process");
