@@ -35,20 +35,11 @@ module.exports = function(grunt){
     grunt.registerTask('test', ['build']);
     grunt.registerTask("run", ["default","start-ui"]);
     grunt.registerTask('start-ui', "Running Sia UI with atom shell...", function(){
-        var done = this.async();
         var cp = require("child_process");
         if (process.platform == "darwin"){
-            cp.execSync("./atom-shell/Atom.app/Contents/MacOS/Atom .", function(err,stdout,stderr){
-                console.error(err,stderr);
-                console.log(stdout);
-                done(true);
-           });
+            console.log(cp.execSync("./atom-shell/Atom.app/Contents/MacOS/Atom ."));
         }else{
-            cp.execSync(path.join("atom-shell","atom") + " .", function(err,stdout,stderr){
-                console.error(err,stderr);
-                console.log(stdout);
-                done(true);
-            });
+            console.log(cp.execSync(path.join("atom-shell","atom") + " ."));
         }
     });
 
