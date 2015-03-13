@@ -21,12 +21,6 @@ module.exports = function(grunt){
               "site/stylesheets/style.css": "site/stylesheets/main.less" // destination file and source file
             }
           }
-        },
-
-        shell: {
-            target: {
-                command: path.join('atom-shell','atom') + ' .'
-            }
         }
 
     });
@@ -39,6 +33,14 @@ module.exports = function(grunt){
     grunt.registerTask('default', ['build', 'download-atom-shell']);
     grunt.registerTask('build', ['execute', 'less']);
     grunt.registerTask('test', ['build']);
-    grunt.registerTask('run', ['default', 'shell']);
+    grunt.registerTask("run", ["default","start-ui"]);
+    grunt.registerTask('start-ui', "Running Sia UI with atom shell...", function(){
+        var cp = require("child_process");
+        if (process.platform == "darwin"){
+            console.log(cp.execSync("./atom-shell/Atom.app/Contents/MacOS/Atom ."));
+        }else{
+            console.log(cp.execSync(path.join("atom-shell","atom") + " ."));
+        }
+    });
 
 };
