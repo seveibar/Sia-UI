@@ -242,9 +242,9 @@ var controller = (function() {
     }
 
     function updateFile(callback) {
-        $.getJSON(uiConfig.siad_addr + "/renter/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/renter/files", function(response) {
             data.file = {
-                "Files": response.Files || []
+                "Files": response || []
             };
             updateUI();
             if (callback) callback();

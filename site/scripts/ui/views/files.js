@@ -23,7 +23,8 @@ ui._files = (function(){
             var files = data.file.Files;
             eFiles.remove();
             var newFileElements = [];
-            files.forEach(function(fileNickname){
+            files.forEach(function(fileObject){
+                var fileNickname = fileObject.Nickname;
                 var eFile = eFileBlueprint.clone().removeClass("blueprint");
                 eFile.find(".name").text(fileNickname);
                 eFile.find(".size").text("? MB");
