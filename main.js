@@ -21,6 +21,8 @@ app.on('ready', function() {
 
     var config = loadConfig();
 
+    setupIPCHandlers();
+
     daemon.start(config, function(err) {
         if (!err) {
             startMainWindow();
@@ -74,4 +76,11 @@ function loadConfig() {
         fs.writeFileSync("config.json", JSON.stringify(defaultConfigJSON));
         return defaultConfigJSON;
     }
+}
+
+function setupIPCHandlers() {
+    ipc.on("save-file-dialog", function(event){
+        var downloadPath = dialog.showSaveDialog();
+        event.returnValue = downloadPath;
+    });
 }

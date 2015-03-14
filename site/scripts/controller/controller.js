@@ -118,10 +118,11 @@ var controller = (function() {
             });
         });
         ui.addListener("download-file", function(fileNickname) {
-            ui.notify("Downloading " + fileNickname + " to Downloads folder", "download");
+            var savePath = ipc.sendSync("save-file-dialog");
+            ui.notify("Downloading " + fileNickname + " to "+savePath+" folder", "download");
             httpApiCall("/renter/download", {
                 "nickname": fileNickname,
-                "destination": fileNickname
+                "destination": savePath
             });
         });
         ui.addListener("upload-file", function(filePath, nickName){
