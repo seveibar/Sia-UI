@@ -53,6 +53,9 @@ module.exports = function(grunt){
         atomProcess.on("error", function(output){
             console.log(output.toString());
         });
+        atomProcess.on("close", function(){
+            done(true);
+        })
     });
 
 };
