@@ -7,7 +7,6 @@ var dialog = require('dialog');
 var shell = require('shell');
 
 var mainWindow = null;
-var config = null;
 
 // Quit when all windows are closed.
 // TODO: Allow daemon to run in background
@@ -20,14 +19,12 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
 
-    config = loadConfig();
+    var config = loadConfig();
 
     daemon.start(config, function(err) {
         if (!err) {
-            console.log("STARTING UP");
             startMainWindow();
         } else {
-            console.log("ERROR WINDOW");
             showErrorWindow(err);
         }
     });
@@ -55,12 +52,13 @@ function showErrorWindow(err) {
     mainWindow = dialog.showMessageBox({
       type: 'warning',
       message: err,
-      buttons: ['Download latest Sia Build'],
+      buttons: ['Okay','Download latest Sia Build'],
       title: 'Siad error'
     });
-    if (mainWindow == 0) {
+    if (mainWindow === 1) {
         shell.openExternal('https://sia-builder.cyrozap.com/job/sia/lastSuccessfulBuild/');
     }
+    mainWindow = null;
 }
 
 function loadConfig() {
