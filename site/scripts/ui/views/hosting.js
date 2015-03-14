@@ -1,6 +1,6 @@
 ui._hosting = (function(){
 
-    var view, ePropBlueprint, ePreset16GB, ePreset32GB, ePreset64GB, eProps, eControl, eSave, eReset;
+    var view, ePropBlueprint, eProps, eControl, eSave, eReset, eAnnounce;
 
 
     var hostProperties = [
@@ -52,9 +52,7 @@ ui._hosting = (function(){
         view = $("#hosting");
 
         ePropBlueprint = view.find(".property.blueprint");
-        ePreset16GB = view.find(".preset1");
-        ePreset32GB = view.find(".preset2");
-        ePreset64GB = view.find(".preset3");
+        eAnnounce = view.find(".announce");
         eControl = view.find(".control");
         eProps = $();
         eSave = view.find(".control .save");
@@ -64,14 +62,8 @@ ui._hosting = (function(){
     }
 
     function addEvents(){
-        ePreset16GB.click(function(){
-            ui._tooltip(this, "Not Implemented");
-        });
-        ePreset32GB.click(function(){
-            ui._tooltip(this, "Not Implemented");
-        });
-        ePreset64GB.click(function(){
-            ui._tooltip(this, "Not Implemented");
+        eAnnounce.click(function(){
+            ui._trigger("announce-host");
         });
         eSave.click(function(){
             ui._tooltip(this, "Saving");

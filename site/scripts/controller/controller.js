@@ -133,6 +133,11 @@ var controller = (function() {
                 ui.notify("File upload complete!", "success");
             });
         });
+        ui.addListener("announce-host", function(){
+            httpApiCall("/host/announce", {}, function(data){
+                ui.notify("Host successfully announced!", "success");
+            });
+        });
         ui.addListener("update-peers", function(peers) {
             ui.notify("Updating Network...", "peers");
 
