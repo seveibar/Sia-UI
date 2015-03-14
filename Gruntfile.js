@@ -36,13 +36,23 @@ module.exports = function(grunt){
     grunt.registerTask("run", ["default","start-ui"]);
     grunt.registerTask('start-ui', "Running Sia UI with atom shell...", function(){
         var atom_path;
+        var done = this.async();
         var cp = require("child_process");
         if (process.platform == "darwin"){
             atom_path = path.join("atom-shell","Atom.app","Contents","MacOS","Atom");
         }else{
             atom_path = path.join("atom-shell","atom");
         }
-        console.log(cp.execSync(atom_path + " ."));
+        var atomProcess = cp.spawn(atom_path, ["."]);
+        atomProcess.stdout.on("data", function(output){
+            console.log(output.toString());
+        });
+        atomProcess.stderr.on("data", function(output){
+            console.log(output.toString());
+        });
+        atomProcess.on("error", function(output){
+            console.log(output.toString());
+        });
     });
 
 };
