@@ -42,6 +42,7 @@ var util = (function(){
     return {
         "engNotation": engNotation,
         "USDConvert": USDConvert,
+        "siaConversionFactor": siaConversionFactor,
         "limitPrecision": limitPrecision,
         "siacoin": siacoin,
         "fsiacoin": fsiacoin
