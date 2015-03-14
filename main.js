@@ -3,6 +3,8 @@ var BrowserWindow = require('browser-window');
 var fs = require("fs");
 var ipc = require("ipc");
 var daemon = require("./lib/daemon.js");
+var dialog = require('dialog');
+var shell = require('shell');
 
 var mainWindow = null;
 var config = null;
@@ -20,8 +22,18 @@ app.on('ready', function() {
 
     config = loadConfig();
 
-    setupIPCHandlers();
+    daemon.start(config, function(err) {
+        if (!err) {
+            console.log("STARTING UP");
+            startMainWindow();
+        } else {
+            console.log("ERROR WINDOW");
+            showErrorWindow(err);
+        }
+    });
+});
 
+function startMainWindow() {
     mainWindow = new BrowserWindow({
         "width": 1200,
         "height": 800,
@@ -36,8 +48,20 @@ app.on('ready', function() {
 
     mainWindow.on('closed', function() {
         mainWindow = null;
+    }); 
+}
+
+function showErrorWindow(err) {
+    mainWindow = dialog.showMessageBox({
+      type: 'warning',
+      message: err,
+      buttons: ['Download latest Sia Build'],
+      title: 'Siad error'
     });
-});
+    if (mainWindow == 0) {
+        shell.openExternal('https://sia-builder.cyrozap.com/job/sia/lastSuccessfulBuild/');
+    }
+}
 
 function loadConfig() {
     // TODO: error handling
@@ -49,13 +73,4 @@ function loadConfig() {
             "siad_addr": "http://localhost:9980"
         };
     }
-}
-
-function setupIPCHandlers() {
-    ipc.on("start-daemon", function() {
-        daemon.start(config);
-    });
-    ipc.on("stop-daemon", function() {
-        daemon.stop();
-    });
 }
