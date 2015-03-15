@@ -118,10 +118,11 @@ var controller = (function() {
             });
         });
         ui.addListener("download-file", function(fileNickname) {
-            ui.notify("Downloading " + fileNickname + " to Downloads folder", "download");
+            var savePath = ipc.sendSync("save-file-dialog");
+            ui.notify("Downloading " + fileNickname + " to "+savePath+" folder", "download");
             httpApiCall("/renter/download", {
                 "nickname": fileNickname,
-                "destination": fileNickname
+                "destination": savePath
             });
         });
         ui.addListener("upload-file", function(filePath, nickName){
@@ -131,6 +132,11 @@ var controller = (function() {
                 "nickname": nickName,
             }, function(){
                 ui.notify("File upload complete!", "success");
+            });
+        });
+        ui.addListener("announce-host", function(){
+            httpApiCall("/host/announce", {}, function(data){
+                ui.notify("Host successfully announced!", "success");
             });
         });
         ui.addListener("update-peers", function(peers) {
@@ -237,9 +243,9 @@ var controller = (function() {
     }
 
     function updateFile(callback) {
-        $.getJSON(uiConfig.siad_addr + "/renter/status", function(response) {
+        $.getJSON(uiConfig.siad_addr + "/renter/files", function(response) {
             data.file = {
-                "Files": response.Files || []
+                "Files": response || []
             };
             updateUI();
             if (callback) callback();
