@@ -250,6 +250,7 @@ var ui = (function(){
 
         eTooltip = $("#tooltip");
 
+        queueHandler.init();
         initViews();
     }
 
@@ -366,6 +367,32 @@ var ui = (function(){
 
         showNotification(message, type, clickAction, small);
     }
+    function addDownloadQueueItem(filename){
+        var element = $(".downloadqueue.blueprint").clone().removeClass("blueprint");
+        element.find(".filename").text(filename);
+        element.click(function(){
+            element.slideUp(function(){
+                element.remove();
+            });
+        });
+        element.css("opacity",0);
+        element.animate({
+            "opacity":1
+        });
+        $(".notification-container").append(element);
+
+        return {
+            "updateName": function(filename){
+                element.find(".filename").text(filename);
+            },
+            "updateProgress": function(amt){
+                element.find(".bar").css("width", (amt*100) + "%");
+            },
+            "remove": function(){
+                element.remove();
+            }
+        };
+    }
 
     function showNotification(message, type, clickAction, small){
         type = type || "alert";
@@ -414,10 +441,17 @@ var ui = (function(){
         eventListeners[event].push(callback);
     }
 
+    function removeListener(event, callback){
+        eventListeners[event] = eventListeners[event].filter(function(listener){
+            return listener != callback;
+        });
+    }
+
     return {
         "switchView": switchView,
         "update": update,
         "addListener": addListener,
+        "addDownloadQueueItem": addDownloadQueueItem,
         "wait": wait,
         "stopWaiting": stopWaiting,
         "notify": notify,
