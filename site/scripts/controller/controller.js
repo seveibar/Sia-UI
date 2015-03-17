@@ -6,6 +6,9 @@ var controller = (function() {
     var uiConfig;
 
     function init() {
+        $.get("http://www.siacoin.com/betamessage.txt", function(content){
+            ui.notify(content);
+        });
         system.getUIConfig(function(config) {
             uiConfig = config;
 
