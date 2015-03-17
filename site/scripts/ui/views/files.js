@@ -84,7 +84,12 @@ ui._files = (function(){
                 var available = fileObject.Available;
                 eFile.find(".name").text(fileNickname);
                 eFile.find(".size").text(" "); //TODO we can't get size ATM
-                eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO we can't get size ATM
+                eFile.find(".time").text(blocksRemaining + "t"); //TODO this unit sucks
+                if (fileObject.Repairing){
+                    eFile.find(".graphic i").removeClass("fa-file").addClass("fa-wrench");
+                }else{
+                    eFile.find(".graphic i").removeClass("fa-wrench").addClass("fa-file");
+                }
                 if (available){
                     eFile.find(".available").find(".yes").show();
                     eFile.find(".available").find(".no").hide();
