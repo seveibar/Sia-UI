@@ -25,12 +25,23 @@ ui._uploadFile = ui["_upload-file"] = (function(){
                     var filePath = data.files[0].path;
                     eStep2.slideDown();
                     view.find(".button.upload").off("click").click(function(){
-                        ui._trigger("upload-file", filePath, eDescription.val());
+                        var nickname = eDescription.val();
+                        ui._trigger("upload-file", filePath, nickname);
+                        controller.addDataListener("file", function(data){
+                            return data.file.Files.some(function(file){
+                                if (file.Nickname == nickname && file.Available){
+                                    ui.notify("\"" + nickname +"\" Uploaded!","success");
+                                    return true;
+                                }
+                                return false;
+                            });
+                        });
+                        ui.switchView("files");
                     });
                 },
                 done: function(e, data){
                     console.log(data._response.result);
-                    ui.notify("File successfully uploaded", "sent");
+                    ui.notify("File upload started", "sent");
                 },
                 error: function(err){
                     console.log(arguments);

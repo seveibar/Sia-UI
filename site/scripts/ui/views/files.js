@@ -26,6 +26,7 @@ ui._files = (function(){
         });
         eSearchBox.click(function(e){
             eSearch.focus();
+            updateFileList(lastLoadedFiles);
         });
     }
 
@@ -48,25 +49,30 @@ ui._files = (function(){
     }
 
     function hashFileList(flist){
-        sortFileList(flist);
-        return flist.reduce(function(acc, file){
-            return acc + file.Nickname + file.Available.toString();
-        }, "");
+        flist = sortFileList(flist);
+        return flist.map(function(file){
+            return file.Nickname + file.Available.toString();
+        }).join("");
     }
 
     function sortFileList(flist){
         return flist.sort(function(a,b){
-            return a.Nickname + a.Available.toString() < b.Nickname + b.Available.toString()
+            var sa = a.Nickname + a.Available.toString();
+            var sb = b.Nickname + b.Available.toString();
+            if (sa < sb) return -1;
+            if (sb < sa) return 1;
+            return 0;
         });
     }
 
+    var th = 0;
     function fileListHasImportantChanges(a,b){
         // we only care about availability and names
         return hashFileList(a) != hashFileList(b);
     }
 
     function updateFileList(files){
-        lastLoadedFiles = files;
+        lastLoadedFiles = sortFileList(files);
         eFiles.remove();
         var newFileElements = [];
         var searchValue = getSearchValue();
