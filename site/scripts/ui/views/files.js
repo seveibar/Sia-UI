@@ -1,11 +1,13 @@
 ui._files = (function(){
 
-    var view, eUploadFile, eFileBlueprint, eFiles;
+    var view, eUploadFile, eFileBlueprint, eFiles, eSearch, eSearchBox;
 
     function init(){
         view = $("#files");
         eUploadFile = view.find(".upload-public");
         eFileBlueprint = view.find(".file.blueprint");
+        eSearchBox = view.find(".search");
+        eSearch = view.find(".search .text");
         eFiles = $();
 
         addEvents();
@@ -15,6 +17,15 @@ ui._files = (function(){
         eUploadFile.click(function(e){
             ui._uploadFile.setPrivacy("public");
             ui.switchView("upload-file");
+        });
+        eSearch.keydown(function(e){
+            if (e.keyCode == 13){
+                e.preventDefault();
+            }
+            updateFileList(lastLoadedFiles);
+        });
+        eSearchBox.click(function(e){
+            eSearch.focus();
         });
     }
 
@@ -29,6 +40,11 @@ ui._files = (function(){
         if (data.file.Files){
             updateFileList(data.file.Files);
         }
+        eSearch[0].innerHTML = "";
+    }
+
+    function getSearchValue(){
+        return eSearch[0].innerHTML;
     }
 
     function hashFileList(flist){
@@ -53,26 +69,29 @@ ui._files = (function(){
         lastLoadedFiles = files;
         eFiles.remove();
         var newFileElements = [];
+        var searchValue = getSearchValue();
         files.forEach(function(fileObject){
             var fileNickname = fileObject.Nickname;
-            var blocksRemaining = fileObject.TimeRemaining;
-            var eFile = eFileBlueprint.clone().removeClass("blueprint");
-            var available = fileObject.Available;
-            eFile.find(".name").text(fileNickname);
-            eFile.find(".size").text(" "); //TODO we can't get size ATM
-            eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO we can't get size ATM
-            if (available){
-                eFile.find(".available").find(".yes").show();
-                eFile.find(".available").find(".no").hide();
-            }else{
-                eFile.find(".available").find(".yes").hide();
-                eFile.find(".available").find(".no").show();
+            if (!searchValue || fileNickname.indexOf(searchValue)!=-1){
+                var blocksRemaining = fileObject.TimeRemaining;
+                var eFile = eFileBlueprint.clone().removeClass("blueprint");
+                var available = fileObject.Available;
+                eFile.find(".name").text(fileNickname);
+                eFile.find(".size").text(" "); //TODO we can't get size ATM
+                eFile.find(".time").text(blocksRemaining + " Blocks Remaining"); //TODO we can't get size ATM
+                if (available){
+                    eFile.find(".available").find(".yes").show();
+                    eFile.find(".available").find(".no").hide();
+                }else{
+                    eFile.find(".available").find(".yes").hide();
+                    eFile.find(".available").find(".no").show();
+                }
+                eFileBlueprint.parent().append(eFile);
+                newFileElements.push(eFile[0]);
+                eFile.click(function(){
+                    ui._trigger("download-file", fileNickname);
+                });
             }
-            eFileBlueprint.parent().append(eFile);
-            newFileElements.push(eFile[0]);
-            eFile.click(function(){
-                ui._trigger("download-file", fileNickname);
-            });
         });
         eFiles = $(newFileElements);
     }
